@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Women's Day - HRC TMU</title>
+    <style>
+        :root {
+            --pink-deep: #fb6f92;
+            --pink-medium: #ff85a1;
+            --pink-light: #ffe5ec;
+            --pink-silk: linear-gradient(135deg, #fff0f3 0%, #ffdde1 100%);
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: radial-gradient(circle, #fff5f7 0%, #ffc2d1 100%);
+        }
+        #bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .decor-item { position: absolute; opacity: 0.7; animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        .container { 
+            position: relative; z-index: 10; 
+            display: flex; justify-content: center; align-items: center; 
+            width: 100vw; height: 100vh;
+            padding-top: 60px; 
+        }
+        #magic-btn {
+            position: relative; z-index: 100;
+            padding: 22px 55px; font-size: 24px; font-weight: bold; color: white;
+            background: linear-gradient(45deg, var(--pink-deep), #ff477e);
+            border: none; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(251, 111, 146, 0.4);
+            animation: heartBeat 1.5s infinite; transition: 0.3s;
+        }
+        #magic-btn:active { transform: scale(0.95); }
+        @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+        .card-wrapper { 
+            display: none; width: 360px; height: 250px; 
+            position: relative; perspective: 1500px;
+        }
+        .envelope {
+            position: absolute; width: 100%; height: 100%;
+            background: #f8adbc; border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            z-index: 5;
+        }
+        .flap {
+            position: absolute; top: 0; left: 0; width: 100%; height: 140px;
+            background: var(--pink-medium);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 30;
+        }
+        .pocket {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+            background: var(--pink-light);
+            clip-path: polygon(0 45%, 100% 45%, 100% 100%, 0 100%);
+            border-radius: 15px; z-index: 25;
+        }
+        .card-content {
+            position: absolute; top: 10px; left: 10px; width: 340px; 
+            background: var(--pink-silk); 
+            border-radius: 10px; padding: 45px 20px; 
+            box-sizing: border-box; text-align: center;
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s;
+            z-index: 20; opacity: 0; height: 550px;
+            border: 2px solid #ffdae2;
+            box-shadow: 0 10px 30px rgba(251, 111, 146, 0.1);
+        }
+
+        .envelope.open .flap { transform: rotateX(180deg); z-index: 10; }
+        .envelope.open .card-content { 
+            transform: translateY(-340px); 
+            opacity: 1; z-index: 40; 
+        }
+
+        .flower-top { font-size: 38px; display: block; margin-bottom: 15px; animation: glow 2s infinite; }
+        @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 5px #ff85a1); } 50% { filter: drop-shadow(0 0 15px #fb6f92); } }
+
+        h2 { color: var(--pink-deep); margin: 0 0 20px 0; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
+        
+        .line { 
+            opacity: 0; transform: translateY(15px); 
+            font-size: 18px; color: #5a4a4d; 
+            margin: 12px 0; line-height: 1.6; 
+            font-weight: 500;
+        }
+        .animate-text { animation: fadeInUp 0.8s ease forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        .footer { font-weight: bold; margin-top: 35px; border-top: 1px dashed var(--pink-medium); padding-top: 25px; font-size: 19px; }
+        .footer b { color: var(--pink-deep); }
+        #qr-trigger {
+            display: none; margin-top: 30px; padding: 12px 35px;
+            background: var(--pink-deep); color: white; border: none;
+            border-radius: 50px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 5px 15px rgba(251, 111, 146, 0.3);
+        }
+
+        #qr-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(251, 111, 146, 0.98); z-index: 200;
+            flex-direction: column; justify-content: center; align-items: center; color: white;
+        }
+        #qr-code { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <div id="bg-animation"></div>
+
+    <div class="container">
+        <button id="magic-btn">Ai là "nàng thơ" thì bấm vào đây nhé :></button>
+
+        <div class="card-wrapper" id="cardWrapper">
+            <div class="envelope" id="envelope">
+                <div class="flap"></div>
+                <div class="pocket"></div>
+                <div class="card-content">
+                    <span class="flower-top">🌸✨</span>
+                    <h2>Happy Women's Day!</h2>
+                    
+                    <p class="line">Gửi tới các "nàng thơ", ✨🌹</p>
+                    <p class="line">Chúc các "nàng thơ", 🌷💖</p>
+                    <p class="line">hạnh phúc, luôn yêu mình, yêu người, 🥰🌸</p>
+                    <p class="line">yêu <b>HRC TMU</b> 🌹🔥</p>
+                    
+                    <p class="line footer">From <b>HRC TMU</b> with Love <span>❤️</span></p>
+                    
+                    <button id="qr-trigger">Gửi tặng các "nàng thơ" khác ✨</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="qr-overlay">
+        <h3 style="font-size: 24px; margin-bottom: 10px;">Gửi tặng "nàng thơ" khác ✨</h3>
+        <p style="margin-bottom: 25px;">Hãy để chị khác quét mã này nhé!</p>
+        <div id="qr-code"></div>
+        <button onclick="document.getElementById('qr-overlay').style.display='none'" style="margin-top: 45px; background: white; border: none; padding: 12px 40px; border-radius: 50px; color: var(--pink-deep); font-weight: bold; cursor: pointer;">Quay lại</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        const bg = document.getElementById('bg-animation');
+        const icons = ['❤️', '🌸', '✨', '🌹', '💖', '🌷', '🦋'];
+        for (let i = 0; i < 45; i++) {
+            const item = document.createElement('div');
+            item.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            item.className = 'decor-item';
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.top = '-10vh';
+            item.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            item.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            item.style.opacity = Math.random() * 0.7 + 0.3;
+            bg.appendChild(item);
+        }
+
+        const btn = document.getElementById('magic-btn');
+        const cardWrapper = document.getElementById('cardWrapper');
+        const envelope = document.getElementById('envelope');
+        const lines = document.querySelectorAll('.line');
+        const qrTrigger = document.getElementById('qr-trigger');
+
+        btn.addEventListener('click', () => {
+            btn.style.display = 'none';
+            cardWrapper.style.display = 'block';
+            setTimeout(() => { envelope.classList.add('open'); }, 400);
+
+            setTimeout(() => {
+                const scalar = 2.5;
+                const rose = confetti.shapeFromText({ text: '🌹', scalar });
+                const heart = confetti.shapeFromText({ text: '❤️', scalar });
+                confetti({ 
+                    particleCount: 160, spread: 100, origin: { y: 0.7 }, 
+                    shapes: [rose, heart], colors: ['#fb6f92', '#ff85a1', '#ffffff'] 
+                });
+            }, 1100);
+
+            lines.forEach((line, index) => {
+                setTimeout(() => { line.classList.add('animate-text'); }, 2200 + index * 950);
+            });
+
+            setTimeout(() => { qrTrigger.style.display = 'inline-block'; }, 8000);
+        });
+
+        qrTrigger.addEventListener('click', () => {
+            const qrContainer = document.getElementById('qr-code');
+            qrContainer.innerHTML = "";
+            new QRCode(qrContainer, {
+                text: window.location.href,
+                width: 220, height: 220,
+                colorDark : "#fb6f92", colorLight : "#ffffff"
+            });
+            document.getElementById('qr-overlay').style.display = 'flex';
+        });
+    </script>
+</body>
+</html>
